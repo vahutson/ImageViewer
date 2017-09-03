@@ -1,0 +1,59 @@
+header {
+    width: 100%;
+    height: 30px;
+    padding-left: 1%;
+    background: purple;
+}
+
+h5  {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    height: 909px;
+}
+
+.image__container {
+    width: 80%;
+    height: 909px; !important;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.image {
+    width: 150px;
+    height: 150px;
+    margin: 2%;
+    background: url("https://unsplash.com/photos/6J--NXulQCs/download?force=true") center no-repeat;
+    background-size: cover;
+}
+
+nav {
+    width: 20%;
+}
+
+nav span {
+    text-transform: uppercase;
+}
+
+ul h6 {
+    width: 100%;
+    background: grey;
+}
+
+.author__filter {
+    height: 50%;
+    overflow: scroll;
+}
+.page__nav {
+    margin: 0 auto;
+    text-align: center;
+}
