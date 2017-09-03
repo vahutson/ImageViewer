@@ -44,7 +44,7 @@ nav span {
     text-transform: uppercase;
 }
 
-ul h6 {
+h6 {
     width: 100%;
     background: grey;
 }
@@ -53,6 +53,12 @@ ul h6 {
     height: 50%;
     overflow: scroll;
 }
+
+.author__filter li, .size__filter li {
+    font-size: 14px;
+    padding-left: 15px;
+}
+
 .page__nav {
     margin: 0 auto;
     text-align: center;
