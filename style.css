@@ -34,7 +34,7 @@ main {
     height: 150px;
     border-radius: 5%;
     margin: 0 2% 2% 2%;
-    background: url("https://unsplash.com/photos/6J--NXulQCs/download?force=true") center no-repeat;
+    background: red;
     background-size: cover;
 }
 
@@ -65,12 +65,14 @@ h6 {
 .author__filter {
     height: 50%;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .author__filter li, .size__filter li {
     font-size: 12px;
     padding-left: 15px;
     line-height: 20px;
+    white-space: nowrap;
     cursor: pointer;
 }
 

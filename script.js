@@ -7,13 +7,14 @@ var containerItem;
 var pageHowMuch;
 var authorArr = [];
 var authorFilter = document.getElementsByClassName('author__filter');
+var pageCounter = 1;
 
 var request = new XMLHttpRequest();
 request.open('GET', 'https://unsplash.it/list');
 request.onreadystatechange = function (e) {
     console.log(this.status);
     if (this.readyState = 4) {
-        if (this.status = 200) {
+        if (this.status = 200 && this.responseText.length !== 0) {
             objArr = JSON.parse(this.responseText);
             go();
         }
@@ -46,8 +47,10 @@ function go() {
     for (i = 0; i < objArr.length; i++) {
         imageDiv = document.createElement('div');
         imageDiv.className = 'image';
-        imageDiv.setAttribute('id', objArr[i].id);
+        imageDiv.setAttribute('index', objArr[i].id);
         imageDiv.setAttribute('author', objArr[i].author);
+        imageDiv.setAttribute('width', objArr[i].width);
+        imageDiv.setAttribute('height', objArr[i].height);
         imageArr.push(imageDiv);
         if (authorArr[i] !== objArr[i].author) {
             authorArr.push(objArr[i].author)
@@ -96,3 +99,28 @@ function authorAppend() {
         authorFilter[0].appendChild(authorLi);
     }
 }
+
+function leaf (where) {
+    if (where === 'next')  {
+    pageCounter += 1;
+    document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
+    for (i=0; i<=pageHowMuch; i++) {
+        container[i].style.display = 'none';
+        for (k = 0; k < 20; k++) {
+
+            // if (imageArr[k].parentNode[j].classList.contains('page1')) {
+            imageArr[k+(pageCounter-1)*20].style.background = 'url(' + objArr[k+(pageCounter-1)*20].post_url + '/download?force=true) center no-repeat';
+            imageArr[k+(pageCounter-1)*20].style.backgroundSize = 'cover';
+            // }
+
+        }
+    }
+    container[pageCounter-1].style.display = 'flex';
+} else {
+    pageCounter -= 1;
+    document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
+    for (j=0; j<=pageHowMuch; j++) {
+        container[j].style.display = 'none';
+}
+        container[pageCounter-1].style.display = 'flex';
+    }}
