@@ -57,23 +57,23 @@ function go() {
     sortAuthor(authorArr);
     authorAppend()
 
-container = document.getElementsByClassName('image__container');
+    container = document.getElementsByClassName('image__container');
 // creating backgrounds and appending images to page
 
-for (j = 0; j <= pageHowMuch + 1; j++) {
+    for (j = 0; j <= pageHowMuch + 1; j++) {
 
-    // imageArr[j].style.background = 'url('+ objArr[j].post_url +'/download?force=true) center no-repeat';
+        // imageArr[j].style.background = 'url('+ objArr[j].post_url +'/download?force=true) center no-repeat';
 
 
-    for (k = 0; k < 20; k++) {
-        container[j].appendChild(imageArr.slice(j * 20, j * 20 + 20)[k]);
-        // if (imageArr[k].parentNode[j].classList.contains('page1')) {
-        imageArr[k].style.background = 'url(' + objArr[k].post_url + '/download?force=true) center no-repeat';
-        imageArr[k].style.backgroundSize = 'cover';
-        // }
+        for (k = 0; k < 20; k++) {
+            container[j].appendChild(imageArr.slice(j * 20, j * 20 + 20)[k]);
+            // if (imageArr[k].parentNode[j].classList.contains('page1')) {
+            imageArr[k].style.background = 'url(' + objArr[k].post_url + '/download?force=true) center no-repeat';
+            imageArr[k].style.backgroundSize = 'cover';
+            // }
 
+        }
     }
-}
 }
 
 function sortAuthor(x) {
@@ -85,13 +85,12 @@ function sortAuthor(x) {
     }
 
 
-
     x.length = i;
     return x;
 }
 
 function authorAppend() {
-    for (i=0; i<=authorArr.length; i++) {
+    for (i = 0; i <= authorArr.length; i++) {
         var authorLi = document.createElement('li');
         authorLi.textContent = authorArr[i];
         authorFilter[0].appendChild(authorLi);

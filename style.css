@@ -5,7 +5,7 @@ header {
     background: purple;
 }
 
-h5  {
+h5 {
     color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -20,7 +20,8 @@ main {
 
 .image__container {
     width: 80%;
-    height: 909px; !important;
+    height: 909px;
+!important;
     overflow: hidden;
     display: flex;
     justify-content: flex-start;
@@ -42,11 +43,16 @@ nav {
 
 nav span {
     text-transform: uppercase;
+    line-height: 30px;
+    color: grey;
 }
 
 h6 {
     width: 100%;
+    padding-left: 5px;
     background: grey;
+    line-height: 30px;
+    color: white;
 }
 
 .author__filter {
@@ -55,8 +61,19 @@ h6 {
 }
 
 .author__filter li, .size__filter li {
-    font-size: 14px;
+    font-size: 12px;
     padding-left: 15px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+li:hover {
+    padding-left: 0;
+}
+
+li:hover::before {
+    content: "●";
+    padding-right: 8px;
 }
 
 .page__nav {
