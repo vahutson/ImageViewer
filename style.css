@@ -43,6 +43,15 @@ main {
     cursor: pointer;
 }
 
+.image.zoomed {
+    position: absolute;
+    width: 100vw;
+    height: 150%;
+    margin: 0;
+    border-style: none;
+    border-radius: inherit;
+}
+
 nav {
     width: 20%;
     padding-right: 2%;
@@ -90,3 +99,15 @@ li:hover::before {
     text-align: center;
 }
 
+.fader {
+    position: absolute;
+    display: none;
+    width: 100vw;
+    height: 100%;
+    background-color: purple;
+    opacity: 0.5;
+}
+
+.fader.active {
+    display: block;
+}

@@ -61,10 +61,11 @@ function go() {
     authorAppend()
 
     container = document.getElementsByClassName('image__container');
+
 // creating backgrounds and appending images to page
 
     for (j = 0; j <= pageHowMuch + 1; j++) {
-
+        container[j].addEventListener('click', zoom);
         // imageArr[j].style.background = 'url('+ objArr[j].post_url +'/download?force=true) center no-repeat';
 
 
@@ -100,27 +101,36 @@ function authorAppend() {
     }
 }
 
-function leaf (where) {
-    if (where === 'next')  {
-    pageCounter += 1;
-    document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
-    for (i=0; i<=pageHowMuch; i++) {
-        container[i].style.display = 'none';
-        for (k = 0; k < 20; k++) {
+function leaf(where) {
+    if (where === 'next') {
+        pageCounter += 1;
+        document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
+        for (i = 0; i <= pageHowMuch; i++) {
+            container[i].style.display = 'none';
+            for (k = 0; k < 20; k++) {
 
-            // if (imageArr[k].parentNode[j].classList.contains('page1')) {
-            imageArr[k+(pageCounter-1)*20].style.background = 'url(' + objArr[k+(pageCounter-1)*20].post_url + '/download?force=true) center no-repeat';
-            imageArr[k+(pageCounter-1)*20].style.backgroundSize = 'cover';
-            // }
+                // if (imageArr[k].parentNode[j].classList.contains('page1')) {
+                imageArr[k + (pageCounter - 1) * 20].style.background = 'url(' + objArr[k + (pageCounter - 1) * 20].post_url + '/download?force=true) center no-repeat';
+                imageArr[k + (pageCounter - 1) * 20].style.backgroundSize = 'cover';
+                // }
 
+            }
         }
+        container[pageCounter - 1].style.display = 'flex';
+    } else {
+        pageCounter -= 1;
+        document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
+        for (j = 0; j <= pageHowMuch; j++) {
+            container[j].style.display = 'none';
+        }
+        container[pageCounter - 1].style.display = 'flex';
     }
-    container[pageCounter-1].style.display = 'flex';
-} else {
-    pageCounter -= 1;
-    document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
-    for (j=0; j<=pageHowMuch; j++) {
-        container[j].style.display = 'none';
 }
-        container[pageCounter-1].style.display = 'flex';
-    }}
+
+function zoom(event) {
+    if (event.target.classList.contains('image')){
+        event.target.classList.toggle('zoomed');
+        document.getElementsByClassName('fader')[0].classList.toggle('active');
+    }
+
+}
