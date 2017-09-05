@@ -7,7 +7,14 @@ var containerItem;
 var pageHowMuch;
 var authorArr = [];
 var authorFilter = document.getElementsByClassName('author__filter');
+var sizeFilter = document.getElementsByClassName('size__filter');
 var pageCounter = 1;
+var filterArrContent = [];
+var buttonPrev = document.getElementsByClassName('prev');
+var buttonNext = document.getElementsByClassName('next');
+
+
+
 
 var request = new XMLHttpRequest();
 request.open('GET', 'https://unsplash.it/list');
@@ -29,6 +36,7 @@ request.send(null);
 function go() {
     // creating pages
     pageHowMuch = Math.ceil(objArr.length / 20);
+    buttonPrev[0].disabled = true;
     for (n = 0; n <= pageHowMuch; n++) {
         containerItem = document.createElement('div');
         containerItem.className = 'image__container';
@@ -58,7 +66,8 @@ function go() {
     }
 
     sortAuthor(authorArr);
-    authorAppend()
+    authorAppend();
+
 
     container = document.getElementsByClassName('image__container');
 
@@ -97,13 +106,22 @@ function authorAppend() {
     for (i = 0; i <= authorArr.length; i++) {
         var authorLi = document.createElement('li');
         authorLi.textContent = authorArr[i];
+        authorLi.classList.add('filterItem');
         authorFilter[0].appendChild(authorLi);
+        authorFilter[0].addEventListener('click', filter);
+        sizeFilter[0].addEventListener('click', filter);
     }
 }
 
 function leaf(where) {
     if (where === 'next') {
+        buttonPrev[0].disabled = false;
         pageCounter += 1;
+
+        if(pageCounter === pageHowMuch) {
+            buttonNext[0].disabled = true;
+        }
+
         document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
         for (i = 0; i <= pageHowMuch; i++) {
             container[i].style.display = 'none';
@@ -119,6 +137,10 @@ function leaf(where) {
         container[pageCounter - 1].style.display = 'flex';
     } else {
         pageCounter -= 1;
+        if(pageCounter === 1) {
+            buttonPrev[0].disabled = true;
+        }
+        buttonNext[0].disabled = false;
         document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
         for (j = 0; j <= pageHowMuch; j++) {
             container[j].style.display = 'none';
@@ -130,7 +152,19 @@ function leaf(where) {
 function zoom(event) {
     if (event.target.classList.contains('image')){
         event.target.classList.toggle('zoomed');
-        document.getElementsByClassName('fader')[0].classList.toggle('active');
     }
 
+}
+
+
+function filter(event) {
+    if (event.target.classList.contains("filterItem")) {
+        event.target.classList.toggle('active');
+    }
+    var filterArr = document.getElementsByClassName('active');
+
+    for (i=0; i<filterArr.length; i++) {
+        filterArrContent.push(filterArr[i].textContent);
+    }
+    console.log(filterArrContent);
 }
