@@ -9,13 +9,8 @@ var authorArr = [];
 var authorFilter = document.getElementsByClassName('author__filter');
 var sizeFilter = document.getElementsByClassName('size__filter');
 var pageCounter = 1;
-var filterArrContent = [];
 var buttonPrev = document.getElementsByClassName('prev');
 var buttonNext = document.getElementsByClassName('next');
-
-
-
-
 var request = new XMLHttpRequest();
 request.open('GET', 'https://unsplash.it/list');
 request.onreadystatechange = function (e) {
@@ -75,8 +70,6 @@ function go() {
 
     for (j = 0; j <= pageHowMuch + 1; j++) {
         container[j].addEventListener('click', zoom);
-        // imageArr[j].style.background = 'url('+ objArr[j].post_url +'/download?force=true) center no-repeat';
-
 
         for (k = 0; k < 20; k++) {
             container[j].appendChild(imageArr.slice(j * 20, j * 20 + 20)[k]);
@@ -96,7 +89,6 @@ function sortAuthor(x) {
             x[i++] = x[q];
         }
     }
-
 
     x.length = i;
     return x;
@@ -118,7 +110,7 @@ function leaf(where) {
         buttonPrev[0].disabled = false;
         pageCounter += 1;
 
-        if(pageCounter === pageHowMuch) {
+        if (pageCounter === pageHowMuch) {
             buttonNext[0].disabled = true;
         }
 
@@ -126,18 +118,14 @@ function leaf(where) {
         for (i = 0; i <= pageHowMuch; i++) {
             container[i].style.display = 'none';
             for (k = 0; k < 20; k++) {
-
-                // if (imageArr[k].parentNode[j].classList.contains('page1')) {
                 imageArr[k + (pageCounter - 1) * 20].style.background = 'url(' + objArr[k + (pageCounter - 1) * 20].post_url + '/download?force=true) center no-repeat';
                 imageArr[k + (pageCounter - 1) * 20].style.backgroundSize = 'cover';
-                // }
-
             }
         }
         container[pageCounter - 1].style.display = 'flex';
     } else {
         pageCounter -= 1;
-        if(pageCounter === 1) {
+        if (pageCounter === 1) {
             buttonPrev[0].disabled = true;
         }
         buttonNext[0].disabled = false;
@@ -150,7 +138,7 @@ function leaf(where) {
 }
 
 function zoom(event) {
-    if (event.target.classList.contains('image')){
+    if (event.target.classList.contains('image')) {
         event.target.classList.toggle('zoomed');
     }
 
@@ -162,8 +150,8 @@ function filter(event) {
         event.target.classList.toggle('active');
     }
     var filterArr = document.getElementsByClassName('active');
-
-    for (i=0; i<filterArr.length; i++) {
+    var filterArrContent = [];
+    for (i = 0; i < filterArr.length; i++) {
         filterArrContent.push(filterArr[i].textContent);
     }
     console.log(filterArrContent);

@@ -2,11 +2,11 @@ header {
     width: 100%;
     height: 30px;
     padding-left: 1%;
-    background: purple;
+    background: #800080;
 }
 
 h5 {
-    color: white;
+    color: #ffffff;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     line-height: 30px;
@@ -30,16 +30,16 @@ main {
 }
 
 .image {
-    width: 150px;
-    height: 150px;
+    width: 170px;
+    height: 170px;
     border-radius: 5%;
     margin: 0 2% 2% 2%;
-    background: red;
+    background: #ff0000;
     background-size: cover;
 }
 
 .image:hover {
-    border: 2px solid purple;
+    border: 2px solid #800080;
     cursor: pointer;
 }
 
@@ -66,7 +66,7 @@ nav span {
 h6 {
     width: 100%;
     padding-left: 5px;
-    background: grey;
+    background: git;
     line-height: 30px;
     color: white;
 }
@@ -99,3 +99,8 @@ h6 {
     text-align: center;
 }
 
+button {
+    background: none;
+    border: none;
+    outline: none;
+}
