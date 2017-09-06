@@ -13,6 +13,7 @@ var pageCounter = 1;
 var buttonPrev = document.getElementsByClassName('prev');
 var buttonNext = document.getElementsByClassName('next');
 var request = new XMLHttpRequest();
+var trashArr = [];
 request.open('GET', 'https://unsplash.it/list');
 request.onreadystatechange = function (e) {
     console.log(this.status);
@@ -192,17 +193,33 @@ function filter(event) {
 
                 }
 
-                if (imageSizeFiltered.length !== 0 && imageAuthorFiltered !== 0) {
 
+            }
+
+        }
+        if (imageSizeFiltered.length !== 0 && imageAuthorFiltered.length !== 0) {
+            for (n=0; n < imageSizeFiltered.length; n++) {
+                for (q=0; q<filterArrContent.length; q++) {
+                    if(imageSizeFiltered[n].getAttribute('author') === filterArrContent[q]) {
+
+                        imageAllFiltered.push(imageSizeFiltered[n]);
+                        imageArrFilteredGlobal = imageAllFiltered;
+                    }
                 }
+            }
+
+            if (imageAllFiltered.length === 0) {
+                imageArrFilteredGlobal = [];
             }
         }
 
-
     }
 
-    console.log(imageArrFilteredGlobal);
-    console.log(filterArrContent);
+    console.log(imageArrFilteredGlobal.length + "---глобал");
+    console.log(filterArrContent + '---контент');
+    console.log(imageSizeFiltered.length + "---размер");
+    console.log(imageAuthorFiltered.length + '---автор');
+    // goFiltered();
 }
 
 // function goFiltered () {
@@ -241,7 +258,7 @@ function filter(event) {
 //         imageDiv.setAttribute('author', imageArrFilteredGlobal[i].author);
 //         imageDiv.setAttribute('width', imageArrFilteredGlobal[i].width);
 //         imageDiv.setAttribute('height', imageArrFilteredGlobal[i].height);
-//         imageDiv.setAttribute('url', imageArrFilteredGlobal[i].post_url);
+//         imageDiv.setAttribute('url', imageArrFilteredGlobal[i].url);
 //         imageArr.push(imageDiv);
 //     }
 //
@@ -255,7 +272,7 @@ function filter(event) {
 //         for (k = 0; k < 20; k++) {
 //             container[j].appendChild(imageArr.slice(j * 20, j * 20 + 20)[k]);
 //             // if (imageArr[k].parentNode[j].classList.contains('page1')) {
-//             imageArr[k].style.background = 'url(' + imageArrFilteredGlobal[k].post_url + '/download?force=true) center no-repeat';
+//             imageArr[k].style.background = 'url(' + imageArrFilteredGlobal[k].url + '/download?force=true) center no-repeat';
 //             imageArr[k].style.backgroundSize = 'cover';
 //             // }
 //
