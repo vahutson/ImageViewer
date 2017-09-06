@@ -63,12 +63,12 @@ function go() {
         }
     }
 
-    for (n=0; n <imageArr.length; n++) {
+    for (n = 0; n < imageArr.length; n++) {
         if (+objArr[n].height >= 1500) {
             imageArr[n].setAttribute('size', 'Large');
         }
 
-       else if (800 < +objArr[n].height <= 1499) {
+        else if (800 < +objArr[n].height <= 1499) {
             imageArr[n].setAttribute('size', 'Medium');
         }
 
@@ -173,28 +173,33 @@ function filter(event) {
     if (filterArrContent.length === 0) {
         imageArrFilteredGlobal = imageArr;
     } else {
-    var imageArrFiltered = [];
-    for (j=0; j<imageArr.length; j++) {
-        for (k=0; k<filterArrContent.length; k++) {
-            if(imageArr[j].getAttribute('author') === filterArrContent[k] || imageArr[j].getAttribute('size') === filterArrContent[k]) {
+        var imageAuthorFiltered = [];
+        var imageSizeFiltered = [];
+        var imageAllFiltered = [];
+        for (j = 0; j < imageArr.length; j++) {
+            for (k = 0; k < filterArrContent.length; k++) {
+                if (imageArr[j].getAttribute('author') === filterArrContent[k]) {
 
-                imageArrFiltered.push(imageArr[j]);
-                imageArrFilteredGlobal = imageArrFiltered;
+                    imageAuthorFiltered.push(imageArr[j]);
+                    imageArrFilteredGlobal = imageAuthorFiltered;
 
+                }
+
+                if (imageArr[j].getAttribute('size') === filterArrContent[k]) {
+
+                    imageSizeFiltered.push(imageArr[j]);
+                    imageArrFilteredGlobal = imageSizeFiltered;
+
+                }
+
+                if (imageSizeFiltered.length !== 0 && imageAuthorFiltered !== 0) {
+
+                }
             }
-
-            // if(imageArr[j].getAttribute('size') === filterArrContent[k]) {
-            //
-            //     imageArrFiltered.push(imageArr[j]);
-            //     imageArrFilteredGlobal = imageArrFiltered;
-            //
-            // }
         }
+
+
     }
-
-    }
-
-
 
     console.log(imageArrFilteredGlobal);
     console.log(filterArrContent);
