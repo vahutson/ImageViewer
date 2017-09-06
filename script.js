@@ -1,6 +1,7 @@
 var objArr;
 var imageDiv;
 var imageArr = [];
+var imageArrFilteredGlobal = [];
 var main = document.getElementsByTagName('main');
 var container;
 var containerItem;
@@ -54,12 +55,27 @@ function go() {
         imageDiv.setAttribute('author', objArr[i].author);
         imageDiv.setAttribute('width', objArr[i].width);
         imageDiv.setAttribute('height', objArr[i].height);
+        imageDiv.setAttribute('url', objArr[i].post_url);
         imageArr.push(imageDiv);
+
         if (authorArr[i] !== objArr[i].author) {
             authorArr.push(objArr[i].author)
         }
     }
 
+    for (n=0; n <imageArr.length; n++) {
+        if (+objArr[n].height >= 1500) {
+            imageArr[n].setAttribute('size', 'Large');
+        }
+
+       else if (800 < +objArr[n].height <= 1499) {
+            imageArr[n].setAttribute('size', 'Medium');
+        }
+
+        else {
+            imageArr[n].setAttribute('size', 'Small');
+        }
+    }
     sortAuthor(authorArr);
     authorAppend();
 
@@ -154,5 +170,90 @@ function filter(event) {
     for (i = 0; i < filterArr.length; i++) {
         filterArrContent.push(filterArr[i].textContent);
     }
+    if (filterArrContent.length === 0) {
+        imageArrFilteredGlobal = imageArr;
+    } else {
+    var imageArrFiltered = [];
+    for (j=0; j<imageArr.length; j++) {
+        for (k=0; k<filterArrContent.length; k++) {
+            if(imageArr[j].getAttribute('author') === filterArrContent[k] || imageArr[j].getAttribute('size') === filterArrContent[k]) {
+
+                imageArrFiltered.push(imageArr[j]);
+                imageArrFilteredGlobal = imageArrFiltered;
+
+            }
+
+            // if(imageArr[j].getAttribute('size') === filterArrContent[k]) {
+            //
+            //     imageArrFiltered.push(imageArr[j]);
+            //     imageArrFilteredGlobal = imageArrFiltered;
+            //
+            // }
+        }
+    }
+
+    }
+
+
+
+    console.log(imageArrFilteredGlobal);
     console.log(filterArrContent);
 }
+
+// function goFiltered () {
+//     // creating pages
+//     pageHowMuch = Math.ceil(imageArrFilteredGlobal.length / 20);
+//     pageCounter = 1;
+//     document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
+//     // for (q=0; q<container.length; q++) {
+//     //     container[q].style.display = 'none';
+//     // }
+//     // container.length = 0;
+//     for (q=0; q<document.getElementsByClassName('image__container').length; q++){
+//         main[0].removeChild(document.getElementsByClassName('image__container')[q]);}
+//
+//
+//     buttonPrev[0].disabled = true;
+//     for (n = 0; n <= pageHowMuch; n++) {
+//         containerItem = document.createElement('div');
+//         containerItem.className = 'image__container';
+//         containerItem.classList.add('page' + (n + 1).toString());
+//         if (containerItem.classList.contains('page1')) {
+//             containerItem.style.display = 'flex';
+//         } else {
+//             containerItem.style.display = 'none';
+//         }
+//         main[0].insertBefore(containerItem, document.getElementsByTagName('nav')[0]);
+//     }
+//
+//
+//     // creating images
+//
+//     for (i = 0; i < imageArrFilteredGlobal.length; i++) {
+//         imageDiv = document.createElement('div');
+//         imageDiv.className = 'image';
+//         imageDiv.setAttribute('index', imageArrFilteredGlobal[i].id);
+//         imageDiv.setAttribute('author', imageArrFilteredGlobal[i].author);
+//         imageDiv.setAttribute('width', imageArrFilteredGlobal[i].width);
+//         imageDiv.setAttribute('height', imageArrFilteredGlobal[i].height);
+//         imageDiv.setAttribute('url', imageArrFilteredGlobal[i].post_url);
+//         imageArr.push(imageDiv);
+//     }
+//
+//     container = document.getElementsByClassName('image__container');
+//
+// // creating backgrounds and appending images to page
+//
+//     for (j = 0; j <= pageHowMuch + 1; j++) {
+//         container[j].addEventListener('click', zoom);
+//
+//         for (k = 0; k < 20; k++) {
+//             container[j].appendChild(imageArr.slice(j * 20, j * 20 + 20)[k]);
+//             // if (imageArr[k].parentNode[j].classList.contains('page1')) {
+//             imageArr[k].style.background = 'url(' + imageArrFilteredGlobal[k].post_url + '/download?force=true) center no-repeat';
+//             imageArr[k].style.backgroundSize = 'cover';
+//             // }
+//
+//         }
+//     }
+// }
