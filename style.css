@@ -7,7 +7,7 @@ header {
 
 .preview {
     display: none;
-    position: absolute;
+    position: fixed;
 }
 
 .preview.zoomed {
@@ -15,6 +15,7 @@ header {
     height: 100%;
     display: block;
     z-index: 1;
+    background-size: 100% 100%, auto;
 }
 
 h5 {
@@ -28,23 +29,24 @@ main {
     display: flex;
     justify-content: space-between;
     padding-top: 2%;
-    height: 900px;
+    height: 90vh;
 }
 
 .image__container {
-    width: 80%;
-    height: 900px;
-    overflow: hidden;
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+    width: 68%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 .image {
-    width: 170px;
-    height: 170px;
+    width: 15%;
+    height: 22%;
+    margin: 0 1% 2% 1%;
     border-radius: 5%;
-    margin: 0 2% 2% 2%;
     background: #610061;
     background-size: cover;
 }
@@ -52,15 +54,6 @@ main {
 .image:hover {
     border: 1px solid #800080;
     cursor: pointer;
-}
-
-.image.zoomed {
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    margin: 0;
-    border-style: none;
-    border-radius: inherit;
 }
 
 nav {
@@ -83,14 +76,14 @@ h6 {
 }
 
 .author__filter {
-    height: 50%;
+    height: 70%;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
 .author__filter li, .size__filter li {
-    font-size: 12px;
     padding-left: 15px;
+    font-size: 12px;
     line-height: 20px;
     white-space: nowrap;
     cursor: pointer;
@@ -101,8 +94,10 @@ h6 {
 }
 
 .filterItem.active::before {
-    content: "●";
-    padding-right: 8px;
+    content: "\2022";
+    padding-right: 10px;
+    font-size: 18px;
+    vertical-align: middle;
 }
 
 .page__nav {
@@ -114,4 +109,5 @@ button {
     background: none;
     border: none;
     outline: none;
+    cursor: pointer;
 }

@@ -1,19 +1,19 @@
 var objArr;
 var imageDiv;
-var imageArr = [];
-var imageArrFilteredGlobal = [];
-var main = document.getElementsByTagName('main');
+var pageCounter = 1;
+var pageHowMuch;
 var container;
 var containerItem;
-var pageHowMuch;
+var imageArr = [];
+var imageArrFilteredGlobal = [];
 var authorArr = [];
 var authorFilter = document.getElementsByClassName('author__filter');
 var sizeFilter = document.getElementsByClassName('size__filter');
-var pageCounter = 1;
+var main = document.getElementsByTagName('main');
 var buttonPrev = document.getElementsByClassName('prev');
 var buttonNext = document.getElementsByClassName('next');
-var request = new XMLHttpRequest();
 var preview = document.getElementsByClassName('preview');
+var request = new XMLHttpRequest();
 
 request.open('GET', 'https://unsplash.it/list');
 request.onreadystatechange = function (e) {
@@ -24,7 +24,7 @@ request.onreadystatechange = function (e) {
             go();
         }
         else {
-            // тут сообщаем о сетевой ошибке
+            //   error message here;
         }
     }
 }
@@ -32,7 +32,6 @@ request.send(null);
 
 
 function go() {
-    // creating pages
     pageHowMuch = Math.ceil(objArr.length / 20);
     buttonPrev[0].disabled = true;
     for (n = 0; n < pageHowMuch; n++) {
@@ -46,9 +45,6 @@ function go() {
         }
         main[0].insertBefore(containerItem, document.getElementsByTagName('nav')[0]);
     }
-
-
-    // creating images
 
     for (i = 0; i < objArr.length; i++) {
         imageDiv = document.createElement('div');
@@ -83,8 +79,6 @@ function go() {
     preview[0].addEventListener('click', zoomout);
 
     container = document.getElementsByClassName('image__container');
-
-// creating backgrounds and appending images to page
 
     for (j = 0; j <= pageHowMuch + 1; j++) {
         container[j].addEventListener('click', zoom);
@@ -165,8 +159,7 @@ function leaf(where) {
 function zoom(event) {
     if (event.target.classList.contains('image')) {
         preview[0].classList.add('zoomed');
-        preview[0].style.background =  'url(https://unsplash.it/'+innerWidth+'/'+innerHeight+'?image=' + event.target.getAttribute('index') + ') center no-repeat';
-        preview[0].style.backgroundPosition = 'cover';
+        preview[0].style.background = 'url(https://unsplash.it/' + innerWidth + '/' + innerHeight + '?image=' + event.target.getAttribute('index') + ') center no-repeat';
     }
 }
 
@@ -192,28 +185,22 @@ function filter(event) {
         for (j = 0; j < imageArr.length; j++) {
             for (k = 0; k < filterArrContent.length; k++) {
                 if (imageArr[j].getAttribute('author') === filterArrContent[k]) {
-
                     imageAuthorFiltered.push(imageArr[j]);
                     imageArrFilteredGlobal = imageAuthorFiltered;
 
                 }
 
                 if (imageArr[j].getAttribute('size') === filterArrContent[k]) {
-
                     imageSizeFiltered.push(imageArr[j]);
                     imageArrFilteredGlobal = imageSizeFiltered;
-
                 }
 
-
             }
-
         }
         if (imageSizeFiltered.length !== 0 && imageAuthorFiltered.length !== 0) {
             for (n = 0; n < imageSizeFiltered.length; n++) {
                 for (q = 0; q < filterArrContent.length; q++) {
                     if (imageSizeFiltered[n].getAttribute('author') === filterArrContent[q]) {
-
                         imageAllFiltered.push(imageSizeFiltered[n]);
                         imageArrFilteredGlobal = imageAllFiltered;
                     }
@@ -224,7 +211,6 @@ function filter(event) {
                 imageArrFilteredGlobal = [];
             }
         }
-
     }
 
     console.log(imageArrFilteredGlobal);
@@ -233,11 +219,9 @@ function filter(event) {
 }
 
 function goFiltered() {
-    // creating pages
     pageHowMuch = Math.ceil(imageArrFilteredGlobal.length / 20);
     pageCounter = 1;
     document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
-
 
     while (container.length) {
         main[0].removeChild(container[0]);
@@ -248,26 +232,24 @@ function goFiltered() {
     } else {
         buttonNext[0].disabled = false;
     }
+
     buttonPrev[0].disabled = true;
+
     for (n = 0; n < pageHowMuch; n++) {
         containerItem = document.createElement('div');
         containerItem.className = 'image__container';
         containerItem.classList.add('page' + (n + 1).toString());
+
         if (containerItem.classList.contains('page1')) {
             containerItem.style.display = 'flex';
         } else {
             containerItem.style.display = 'none';
         }
+
         main[0].insertBefore(containerItem, document.getElementsByTagName('nav')[0]);
     }
 
-
-    // creating images
-
-
     container = document.getElementsByClassName('image__container');
-
-// creating backgrounds and appending images to page
 
     for (j = 0; j <= pageHowMuch + 1; j++) {
         container[j].addEventListener('click', zoom);
@@ -277,8 +259,6 @@ function goFiltered() {
             // if (imageArr[k].parentNode[j].classList.contains('page1')) {
             imageArrFilteredGlobal[k].style.background = 'url(https://unsplash.it/170/170?image=' + imageArrFilteredGlobal[k].getAttribute('index') + ') center no-repeat';
             imageArrFilteredGlobal[k].style.backgroundSize = 'cover';
-            // }
-
         }
     }
 }
