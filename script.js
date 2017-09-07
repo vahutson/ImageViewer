@@ -34,7 +34,7 @@ function go() {
     // creating pages
     pageHowMuch = Math.ceil(objArr.length / 20);
     buttonPrev[0].disabled = true;
-    for (n = 0; n <= pageHowMuch; n++) {
+    for (n = 0; n < pageHowMuch; n++) {
         containerItem = document.createElement('div');
         containerItem.className = 'image__container';
         containerItem.classList.add('page' + (n + 1).toString());
@@ -90,11 +90,8 @@ function go() {
 
         for (k = 0; k < 20; k++) {
             container[j].appendChild(imageArr.slice(j * 20, j * 20 + 20)[k]);
-            // if (imageArr[k].parentNode[j].classList.contains('page1')) {
             imageArr[k].style.background = 'url(https://unsplash.it/170/170?image=' + objArr[k].id + ') center no-repeat';
             imageArr[k].style.backgroundSize = 'cover';
-            // }
-
         }
     }
 }
@@ -127,16 +124,26 @@ function leaf(where) {
         buttonPrev[0].disabled = false;
         pageCounter += 1;
 
-        if (pageCounter === pageHowMuch) {
+        if (pageCounter >= pageHowMuch) {
             buttonNext[0].disabled = true;
         }
 
         document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
-        for (i = 0; i <= pageHowMuch; i++) {
-            container[i].style.display = 'none';
-            for (k = 0; k < 20; k++) {
-                imageArr[k + (pageCounter - 1) * 20].style.background = 'url(https://unsplash.it/170/170?image=' + objArr[k + (pageCounter - 1) * 20].id + ') center no-repeat';
-                imageArr[k + (pageCounter - 1) * 20].style.backgroundSize = 'cover';
+        if (imageArrFilteredGlobal.length === 0) {
+            for (i = 0; i < pageHowMuch; i++) {
+                container[i].style.display = 'none';
+                for (k = 0; k < 20; k++) {
+                    imageArr[k + (pageCounter - 1) * 20].style.background = 'url(https://unsplash.it/170/170?image=' + objArr[k + (pageCounter - 1) * 20].id + ') center no-repeat';
+                    imageArr[k + (pageCounter - 1) * 20].style.backgroundSize = 'cover';
+                }
+            }
+        } else {
+            for (i = 0; i < pageHowMuch; i++) {
+                container[i].style.display = 'none';
+                for (k = 0; k < 20; k++) {
+                    imageArrFilteredGlobal[k + (pageCounter - 1) * 20].style.background = 'url(https://unsplash.it/170/170?image=' + imageArrFilteredGlobal[k + (pageCounter - 1) * 20].getAttribute('index') + ') center no-repeat';
+                    imageArrFilteredGlobal[k + (pageCounter - 1) * 20].style.backgroundSize = 'cover';
+                }
             }
         }
         container[pageCounter - 1].style.display = 'flex';
@@ -147,7 +154,7 @@ function leaf(where) {
         }
         buttonNext[0].disabled = false;
         document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
-        for (j = 0; j <= pageHowMuch; j++) {
+        for (j = 0; j < pageHowMuch; j++) {
             container[j].style.display = 'none';
         }
         container[pageCounter - 1].style.display = 'flex';
@@ -198,9 +205,9 @@ function filter(event) {
 
         }
         if (imageSizeFiltered.length !== 0 && imageAuthorFiltered.length !== 0) {
-            for (n=0; n < imageSizeFiltered.length; n++) {
-                for (q=0; q<filterArrContent.length; q++) {
-                    if(imageSizeFiltered[n].getAttribute('author') === filterArrContent[q]) {
+            for (n = 0; n < imageSizeFiltered.length; n++) {
+                for (q = 0; q < filterArrContent.length; q++) {
+                    if (imageSizeFiltered[n].getAttribute('author') === filterArrContent[q]) {
 
                         imageAllFiltered.push(imageSizeFiltered[n]);
                         imageArrFilteredGlobal = imageAllFiltered;
@@ -214,55 +221,59 @@ function filter(event) {
         }
 
     }
-// goFiltered()
+
     console.log(imageArrFilteredGlobal);
     console.log(filterArrContent);
-    // goFiltered();
+    goFiltered();
 }
 
-// function goFiltered () {
-//     // creating pages
-//     pageHowMuch = Math.ceil(imageArrFilteredGlobal.length / 20);
-//     pageCounter = 1;
-//     document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
-//
-//     for (r=0; r<document.getElementsByClassName('image__container').length; r++){
-//         main[0].removeChild(document.getElementsByClassName('image__container')[r]);
-//     console.log(r + ' r');}
-//
-//
-//     buttonPrev[0].disabled = true;
-//     for (n = 0; n <= pageHowMuch; n++) {
-//         containerItem = document.createElement('div');
-//         containerItem.className = 'image__container';
-//         containerItem.classList.add('page' + (n + 1).toString());
-//         if (containerItem.classList.contains('page1')) {
-//             containerItem.style.display = 'flex';
-//         } else {
-//             containerItem.style.display = 'none';
-//         }
-//         main[0].insertBefore(containerItem, document.getElementsByTagName('nav')[0]);
-//     }
-//
-//
-//     // creating images
-//
-//
-//
-//     container = document.getElementsByClassName('image__container');
-//
-// // creating backgrounds and appending images to page
-//
-//     for (j = 0; j <= pageHowMuch + 1; j++) {
-//         container[j].addEventListener('click', zoom);
-//
-//         for (k = 0; k < 20; k++) {
-//             container[j].appendChild(imageArrFilteredGlobal.slice(j * 20, j * 20 + 20)[k]);
-//             // if (imageArr[k].parentNode[j].classList.contains('page1')) {
-//             imageArrFilteredGlobal[k].style.background = 'url(' + imageArrFilteredGlobal[k].url + '/download?force=true) center no-repeat';
-//             imageArrFilteredGlobal[k].style.backgroundSize = 'cover';
-//             // }
-//
-//         }
-//     }
-// }
+function goFiltered() {
+    // creating pages
+    pageHowMuch = Math.ceil(imageArrFilteredGlobal.length / 20);
+    pageCounter = 1;
+    document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
+
+
+    while (container.length) {
+        main[0].removeChild(container[0]);
+    }
+
+    if (pageCounter >= pageHowMuch) {
+        buttonNext[0].disabled = true;
+    } else {
+        buttonNext[0].disabled = false;
+    }
+    buttonPrev[0].disabled = true;
+    for (n = 0; n < pageHowMuch; n++) {
+        containerItem = document.createElement('div');
+        containerItem.className = 'image__container';
+        containerItem.classList.add('page' + (n + 1).toString());
+        if (containerItem.classList.contains('page1')) {
+            containerItem.style.display = 'flex';
+        } else {
+            containerItem.style.display = 'none';
+        }
+        main[0].insertBefore(containerItem, document.getElementsByTagName('nav')[0]);
+    }
+
+
+    // creating images
+
+
+    container = document.getElementsByClassName('image__container');
+
+// creating backgrounds and appending images to page
+
+    for (j = 0; j <= pageHowMuch + 1; j++) {
+        container[j].addEventListener('click', zoom);
+
+        for (k = 0; k < 20; k++) {
+            container[j].appendChild(imageArrFilteredGlobal.slice(j * 20, j * 20 + 20)[k]);
+            // if (imageArr[k].parentNode[j].classList.contains('page1')) {
+            imageArrFilteredGlobal[k].style.background = 'url(https://unsplash.it/170/170?image=' + imageArrFilteredGlobal[k].getAttribute('index') + ') center no-repeat';
+            imageArrFilteredGlobal[k].style.backgroundSize = 'cover';
+            // }
+
+        }
+    }
+}

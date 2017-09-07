@@ -15,17 +15,16 @@ h5 {
 main {
     display: flex;
     justify-content: space-between;
+    padding-top: 2%;
     height: 909px;
 }
 
 .image__container {
     width: 80%;
     height: 909px;
-!important;
     overflow: hidden;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
     flex-wrap: wrap;
 }
 
@@ -34,7 +33,7 @@ main {
     height: 170px;
     border-radius: 5%;
     margin: 0 2% 2% 2%;
-    background: #ff0000;
+    background: #610061;
     background-size: cover;
 }
 
