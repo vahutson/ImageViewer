@@ -16,12 +16,12 @@ main {
     display: flex;
     justify-content: space-between;
     padding-top: 2%;
-    height: 909px;
+    height: 900px;
 }
 
 .image__container {
     width: 80%;
-    height: 909px;
+    height: 900px;
     overflow: hidden;
     display: flex;
     justify-content: flex-start;
@@ -38,7 +38,7 @@ main {
 }
 
 .image:hover {
-    border: 2px solid #800080;
+    border: 1px solid #800080;
     cursor: pointer;
 }
 
