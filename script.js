@@ -13,7 +13,8 @@ var pageCounter = 1;
 var buttonPrev = document.getElementsByClassName('prev');
 var buttonNext = document.getElementsByClassName('next');
 var request = new XMLHttpRequest();
-var trashArr = [];
+var preview = document.getElementsByClassName('preview');
+
 request.open('GET', 'https://unsplash.it/list');
 request.onreadystatechange = function (e) {
     console.log(this.status);
@@ -79,7 +80,7 @@ function go() {
     }
     sortAuthor(authorArr);
     authorAppend();
-
+    preview[0].addEventListener('click', zoomout);
 
     container = document.getElementsByClassName('image__container');
 
@@ -163,11 +164,15 @@ function leaf(where) {
 
 function zoom(event) {
     if (event.target.classList.contains('image')) {
-        event.target.classList.toggle('zoomed');
+        preview[0].classList.add('zoomed');
+        preview[0].style.background =  'url(https://unsplash.it/'+innerWidth+'/'+innerHeight+'?image=' + event.target.getAttribute('index') + ') center no-repeat';
+        preview[0].style.backgroundPosition = 'cover';
     }
-
 }
 
+function zoomout() {
+    preview[0].classList.remove('zoomed');
+}
 
 function filter(event) {
     if (event.target.classList.contains("filterItem")) {
