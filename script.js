@@ -214,11 +214,9 @@ function filter(event) {
         }
 
     }
-
-    console.log(imageArrFilteredGlobal.length + "---глобал");
-    console.log(filterArrContent + '---контент');
-    console.log(imageSizeFiltered.length + "---размер");
-    console.log(imageAuthorFiltered.length + '---автор');
+// goFiltered()
+    console.log(imageArrFilteredGlobal);
+    console.log(filterArrContent);
     // goFiltered();
 }
 
@@ -227,12 +225,10 @@ function filter(event) {
 //     pageHowMuch = Math.ceil(imageArrFilteredGlobal.length / 20);
 //     pageCounter = 1;
 //     document.getElementsByClassName('page__counter')[0].textContent = pageCounter;
-//     // for (q=0; q<container.length; q++) {
-//     //     container[q].style.display = 'none';
-//     // }
-//     // container.length = 0;
-//     for (q=0; q<document.getElementsByClassName('image__container').length; q++){
-//         main[0].removeChild(document.getElementsByClassName('image__container')[q]);}
+//
+//     for (r=0; r<document.getElementsByClassName('image__container').length; r++){
+//         main[0].removeChild(document.getElementsByClassName('image__container')[r]);
+//     console.log(r + ' r');}
 //
 //
 //     buttonPrev[0].disabled = true;
@@ -251,16 +247,7 @@ function filter(event) {
 //
 //     // creating images
 //
-//     for (i = 0; i < imageArrFilteredGlobal.length; i++) {
-//         imageDiv = document.createElement('div');
-//         imageDiv.className = 'image';
-//         imageDiv.setAttribute('index', imageArrFilteredGlobal[i].id);
-//         imageDiv.setAttribute('author', imageArrFilteredGlobal[i].author);
-//         imageDiv.setAttribute('width', imageArrFilteredGlobal[i].width);
-//         imageDiv.setAttribute('height', imageArrFilteredGlobal[i].height);
-//         imageDiv.setAttribute('url', imageArrFilteredGlobal[i].url);
-//         imageArr.push(imageDiv);
-//     }
+//
 //
 //     container = document.getElementsByClassName('image__container');
 //
@@ -270,10 +257,10 @@ function filter(event) {
 //         container[j].addEventListener('click', zoom);
 //
 //         for (k = 0; k < 20; k++) {
-//             container[j].appendChild(imageArr.slice(j * 20, j * 20 + 20)[k]);
+//             container[j].appendChild(imageArrFilteredGlobal.slice(j * 20, j * 20 + 20)[k]);
 //             // if (imageArr[k].parentNode[j].classList.contains('page1')) {
-//             imageArr[k].style.background = 'url(' + imageArrFilteredGlobal[k].url + '/download?force=true) center no-repeat';
-//             imageArr[k].style.backgroundSize = 'cover';
+//             imageArrFilteredGlobal[k].style.background = 'url(' + imageArrFilteredGlobal[k].url + '/download?force=true) center no-repeat';
+//             imageArrFilteredGlobal[k].style.backgroundSize = 'cover';
 //             // }
 //
 //         }
