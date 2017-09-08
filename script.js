@@ -31,7 +31,6 @@ request.onreadystatechange = function (e) {
 }
 request.send(null);
 
-
 function go() {
     pageHowMuch = Math.ceil(objArr.length / 20);
     buttonPrev[0].disabled = true;
@@ -185,6 +184,7 @@ function filter(event) {
         var imageAuthorFiltered = [];
         var imageSizeFiltered = [];
         var imageAllFiltered = [];
+        var imageSizeTrashFiltered = [];
         for (j = 0; j < imageArr.length; j++) {
             for (k = 0; k < filterArrContent.length; k++) {
                 if (imageArr[j].getAttribute("author") === filterArrContent[k]) {
@@ -196,6 +196,10 @@ function filter(event) {
                 if (imageArr[j].getAttribute("size") === filterArrContent[k]) {
                     imageSizeFiltered.push(imageArr[j]);
                     imageArrFilteredGlobal = imageSizeFiltered;
+                }
+
+                if (filterArrContent[k] === 'Small') {
+                    imageArrFilteredGlobal = [];
                 }
 
             }
