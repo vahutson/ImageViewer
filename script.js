@@ -45,7 +45,6 @@ function go() {
         }
         main[0].insertBefore(containerItem, document.getElementsByTagName("nav")[0]);
     }
-
     for (i = 0; i < objArr.length; i++) {
         imageDiv = document.createElement("div");
         imageDiv.className = "image";
@@ -55,21 +54,17 @@ function go() {
         imageDiv.setAttribute("height", objArr[i].height);
         imageDiv.setAttribute("url", objArr[i].post_url);
         imageArr.push(imageDiv);
-
         if (authorArr[i] !== objArr[i].author) {
             authorArr.push(objArr[i].author)
         }
     }
-
     for (n = 0; n < imageArr.length; n++) {
         if (+objArr[n].height >= 1500) {
             imageArr[n].setAttribute("size", "Large");
         }
-
         else if (800 < +objArr[n].height <= 1499) {
             imageArr[n].setAttribute("size", "Medium");
         }
-
         else {
             imageArr[n].setAttribute("size", "Small");
         }
@@ -89,7 +84,7 @@ function go() {
                 imageArr[k].style.backgroundSize = "cover";
             }
         } else {
-            for (k = 0; k < imageArr.slice(j * 20).length+1; k++) {
+            for (k = 0; k < imageArr.slice(j * 20).length + 1; k++) {
                 container[j].appendChild(imageArr.slice(j * 20)[k]);
                 imageArr[k].style.background = "url(https://unsplash.it/170/170?image=" + objArr[k].id + ") center no-repeat";
                 imageArr[k].style.backgroundSize = "cover";
@@ -105,7 +100,6 @@ function sortAuthor(x) {
             x[i++] = x[q];
         }
     }
-
     x.length = i;
     return x;
 }
@@ -125,7 +119,6 @@ function leaf(where) {
     if (where === "next") {
         buttonPrev[0].disabled = false;
         pageCounter += 1;
-
         if (pageCounter >= pageHowMuch) {
             buttonNext[0].disabled = true;
         }
@@ -142,15 +135,15 @@ function leaf(where) {
         } else {
             for (i = 0; i < pageHowMuch; i++) {
                 container[i].style.display = "none";
-                container[pageCounter-2].style.display = "none";
-                container[pageCounter-1].style.display = "flex";
+                container[pageCounter - 2].style.display = "none";
+                container[pageCounter - 1].style.display = "flex";
                 for (k = 0; k < 20; k++) {
                     imageArrFilteredGlobal[k + (pageCounter - 1) * 20].style.background = "url(https://unsplash.it/170/170?image=" + imageArrFilteredGlobal[k + (pageCounter - 1) * 20].getAttribute("index") + ") center no-repeat";
                     imageArrFilteredGlobal[k + (pageCounter - 1) * 20].style.backgroundSize = "cover";
                 }
             }
-            container=document.getElementsByClassName('image__container');
-            container[pageCounter-1].style.display = "flex";
+            container = document.getElementsByClassName('image__container');
+            container[pageCounter - 1].style.display = "flex";
         }
         container[pageCounter - 1].style.display = "flex";
     } else {
@@ -200,18 +193,14 @@ function filter(event) {
                 if (imageArr[j].getAttribute("author") === filterArrContent[k]) {
                     imageAuthorFiltered.push(imageArr[j]);
                     imageArrFilteredGlobal = imageAuthorFiltered;
-
                 }
-
                 if (imageArr[j].getAttribute("size") === filterArrContent[k]) {
                     imageSizeFiltered.push(imageArr[j]);
                     imageArrFilteredGlobal = imageSizeFiltered;
                 }
-
-                if (filterArrContent[k] === 'Small' && imageSizeFiltered.length ===0) {
+                if (filterArrContent[k] === 'Small' && imageSizeFiltered.length === 0) {
                     imageArrFilteredGlobal = [];
                 }
-
             }
         }
         if (imageSizeFiltered.length !== 0 && imageAuthorFiltered.length !== 0) {
@@ -223,51 +212,45 @@ function filter(event) {
                     }
                 }
             }
-
             if (imageAllFiltered.length === 0) {
                 imageArrFilteredGlobal = [];
             }
         }
     }
-
     goFiltered();
 }
 
 function goFiltered() {
     if (imageArrFilteredGlobal.length !== 0) {
-    pageHowMuch = Math.ceil(imageArrFilteredGlobal.length / 20);}
+        pageHowMuch = Math.ceil(imageArrFilteredGlobal.length / 20);
+    }
     else {
         pageHowMuch = 1;
     }
     pageCounter = 1;
     document.getElementsByClassName("page__counter")[0].textContent = pageCounter;
-
     while (container.length) {
         main[0].removeChild(container[0]);
     }
-
     if (pageCounter >= pageHowMuch) {
         buttonNext[0].disabled = true;
     } else {
         buttonNext[0].disabled = false;
     }
-
     buttonPrev[0].disabled = true;
-
     if (imageArrFilteredGlobal.length !== 0) {
-    for (n = 0; n < pageHowMuch; n++) {
-        containerItem = document.createElement("div");
-        containerItem.className = "image__container";
-        containerItem.classList.add("page" + (n + 1).toString());
+        for (n = 0; n < pageHowMuch; n++) {
+            containerItem = document.createElement("div");
+            containerItem.className = "image__container";
+            containerItem.classList.add("page" + (n + 1).toString());
+            if (containerItem.classList.contains("page1")) {
+                containerItem.style.display = "flex";
+            } else {
+                containerItem.style.display = "none";
+            }
 
-        if (containerItem.classList.contains("page1")) {
-            containerItem.style.display = "flex";
-        } else {
-            containerItem.style.display = "none";
+            main[0].insertBefore(containerItem, document.getElementsByTagName("nav")[0]);
         }
-
-        main[0].insertBefore(containerItem, document.getElementsByTagName("nav")[0]);
-    }
     } else {
         containerItem = document.createElement("div");
         containerItem.className = "image__container";
@@ -288,7 +271,7 @@ function goFiltered() {
                 imageArrFilteredGlobal[k].style.backgroundSize = "cover";
             }
         } else {
-            for (k = 0; k < imageArrFilteredGlobal.slice(j * 20).length+1; k++) {
+            for (k = 0; k < imageArrFilteredGlobal.slice(j * 20).length + 1; k++) {
                 container[j].appendChild(imageArrFilteredGlobal.slice(j * 20)[k]);
                 imageArrFilteredGlobal[k].style.background = "url(https://unsplash.it/170/170?image=" + imageArrFilteredGlobal[k].getAttribute("index") + ") center no-repeat";
                 imageArrFilteredGlobal[k].style.backgroundSize = "cover";
