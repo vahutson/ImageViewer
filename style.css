@@ -2,7 +2,7 @@ header {
     width: 100%;
     height: 30px;
     padding-left: 1%;
-    background: #808080;
+    background: #935b94;
 }
 
 .preview {
@@ -15,7 +15,7 @@ header {
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: #808080;
+    background-color: #935b94;
     opacity: 0.8;
 }
 
